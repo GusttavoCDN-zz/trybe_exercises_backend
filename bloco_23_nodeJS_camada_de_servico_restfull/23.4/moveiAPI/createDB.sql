@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS movies (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    direcao VARCHAR(20) NOT NULL,
+    data_de_lancamento INT NOT NULL
+);
