@@ -1,4 +1,10 @@
 import express from 'express';
+import db from './config/db.connect.js';
+
+db.on('error', console.log.bind(console, 'Connection Error'));
+db.once('open', () => {
+  console.log('Conecction sucessfully completed');
+});
 
 const app = express();
 app.use(express.json());
