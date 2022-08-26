@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Level.associate = function (models) {
-    Level.hasMany(models.Class);
+    Level.hasMany(models.Class, { foreignKey: 'level_id' });
   };
 
   return Level;

@@ -1,12 +1,10 @@
 'use strict';
-'use strict';
 /**
  *
  * @param {import('sequelize').Sequelize} sequelize
  * @param {import('sequelize').DataTypes } DataTypes
  */
-
-module.exports = async (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const Class = sequelize.define('Class', {
     start_date: DataTypes.DATEONLY,
   });
@@ -15,8 +13,8 @@ module.exports = async (sequelize, DataTypes) => {
     Class.hasMany(models.Enrollment, {
       foreignKey: 'class_id',
     });
-    Class.belongsTo(models.Person);
-    Class.belongsTo(models.Level);
+    Class.belongsTo(models.Person, { foreignKey: 'teacher_id' });
+    Class.belongsTo(models.Level, { foreignKey: 'level_id' });
   };
 
   return Class;

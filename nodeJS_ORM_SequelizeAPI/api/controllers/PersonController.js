@@ -36,7 +36,7 @@ class PersonController {
     try {
       const { name, active, email, role } = req.body;
       const person = await Person.create({ name, active, email, role });
-      return res.status(200).json(person);
+      return res.status(201).json(person);
     } catch (error) {
       return res.status(500).json(error.message);
     }
@@ -61,8 +61,8 @@ class PersonController {
   static deletePerson = async (req, res) => {
     try {
       const { id } = req.params;
-      const destroyedPerson = await Person.destroy({ where: { id } });
-      return res.status(200).json(destroyedPerson);
+      await Person.destroy({ where: { id } });
+      res.send(200).json({ message: 'Deleted' });
     } catch (error) {
       return res.status(500).json(error.message);
     }
