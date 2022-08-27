@@ -1,4 +1,4 @@
-'use strict';
+/* eslint-disable camelcase */
 /**
  *
  * @param {import('sequelize').Sequelize} sequelize
@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     start_date: DataTypes.DATEONLY,
   });
 
-  Class.associate = function (models) {
+  Class.associate = (models) => {
     Class.hasMany(models.Enrollment, {
       foreignKey: 'class_id',
     });

@@ -1,4 +1,4 @@
-'use strict';
+/* eslint-disable max-lines-per-function */
 /**
  *
  * @param {import('sequelize').Sequelize} sequelize
@@ -13,10 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       role: DataTypes.STRING,
     },
-    { tableName: 'People' }
+    { tableName: 'People' },
   );
 
-  Person.associate = function (models) {
+  Person.associate = (models) => {
     Person.hasMany(models.Class, {
       foreignKey: 'teacher_id',
     });

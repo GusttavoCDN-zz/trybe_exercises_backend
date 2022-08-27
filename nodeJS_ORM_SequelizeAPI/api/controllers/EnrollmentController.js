@@ -1,8 +1,7 @@
+/* eslint-disable camelcase */
 const { Enrollment } = require('../models');
 
 class EnrollmentController {
-  static async getAll(req, res) {}
-
   static async getOne(req, res) {
     const { studentId, enrollmentId } = req.params;
     try {

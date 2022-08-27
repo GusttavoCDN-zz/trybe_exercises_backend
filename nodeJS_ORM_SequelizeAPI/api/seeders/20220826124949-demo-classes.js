@@ -1,13 +1,14 @@
-'use strict';
-
+/* eslint-disable sonarjs/no-duplicate-string */
+/* eslint-disable max-lines-per-function */
+/* eslint-disable camelcase */
 module.exports = {
   /**
    *
    * @param {import('sequelize').QueryInterface} queryInterface
    * @param {import('sequelize').Sequelize } Sequelize
    */
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert(
+  up: (queryInterface, _Sequelize) =>
+    queryInterface.bulkInsert(
       'Classes',
       [
         {
@@ -39,16 +40,13 @@ module.exports = {
           updatedAt: new Date(),
         },
       ],
-      {}
-    );
-  },
+      {},
+    ),
 
   /**
    *
    * @param {import('sequelize').QueryInterface} queryInterface
    * @param {import('sequelize').Sequelize } Sequelize
    */
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Classes', null, {});
-  },
+  down: (queryInterface, _Sequelize) => queryInterface.bulkDelete('Classes', null, {}),
 };

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./api/index.js"
+    "dev": "nodemon ./api/index.js",
+    "lint": "eslint --no-error-on-unmatched-pattern -c .eslintrc --fix . --ext .js, .jsx"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +18,9 @@
     "sequelize-cli": "^6.4.1"
   },
   "devDependencies": {
+    "eslint": "^8.23.0",
+    "eslint-config-trybe-backend": "^1.0.4",
+    "eslint-plugin-sonarjs": "^0.15.0",
     "nodemon": "^2.0.19"
   }
 }

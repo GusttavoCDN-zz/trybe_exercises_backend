@@ -1,5 +1,4 @@
-'use strict';
-'use strict';
+/* eslint-disable camelcase */
 /**
  *
  * @param {import('sequelize').Sequelize} sequelize
@@ -10,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     desc_level: DataTypes.STRING,
   });
 
-  Level.associate = function (models) {
+  Level.associate = (models) => {
     Level.hasMany(models.Class, { foreignKey: 'level_id' });
   };
 

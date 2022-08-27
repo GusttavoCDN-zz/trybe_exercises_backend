@@ -1,14 +1,15 @@
+/* eslint-disable camelcase */
 const { Level } = require('../models');
 
 class LevelController {
-  static getAll = async (req, res) => {
+  static async getAll(req, res) {
     try {
       const levels = await Level.findAll();
       return res.status(200).json(levels);
     } catch (error) {
       return res.status(500).json(error);
     }
-  };
+  }
 
   static async getOne(req, res) {
     const { id } = req.params;
@@ -44,7 +45,7 @@ class LevelController {
   static async delete(req, res) {
     const { id } = req.params;
     try {
-      await Class.destroy({ where: { id } });
+      await Level.destroy({ where: { id } });
       return res.status(200).json({ message: 'Deleted' });
     } catch (error) {
       return res.status(500).json(error);

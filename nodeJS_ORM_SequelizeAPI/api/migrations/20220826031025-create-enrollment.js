@@ -1,4 +1,5 @@
-'use strict';
+/* eslint-disable camelcase */
+/* eslint-disable max-lines-per-function */
 /**
  *
  * @param {import('sequelize').Sequelize} sequelize
@@ -36,7 +37,7 @@ module.exports = {
       },
     });
   },
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface, _Sequelize) {
     await queryInterface.dropTable('Enrollments');
   },
 };

@@ -1,4 +1,3 @@
-'use strict';
 /**
  *
  * @param {import('sequelize').Sequelize} sequelize
@@ -9,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     status: DataTypes.STRING,
   });
 
-  Enrollment.associate = function (models) {
+  Enrollment.associate = (models) => {
     Enrollment.belongsTo(models.Person, { foreignKey: 'student_id' });
     Enrollment.belongsTo(models.Class, { foreignKey: 'class_id' });
   };

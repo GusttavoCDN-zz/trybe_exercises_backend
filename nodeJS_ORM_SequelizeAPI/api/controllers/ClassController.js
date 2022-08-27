@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const { Class } = require('../models');
 
 class ClassController {
@@ -13,6 +14,7 @@ class ClassController {
   static async getOne(req, res) {
     const { id } = req.params;
     try {
+      // eslint-disable-next-line no-underscore-dangle
       const _class = await Class.findByPk(id);
       return res.status(200).json(_class);
     } catch (error) {

@@ -1,4 +1,4 @@
-'use strict';
+/* eslint-disable max-lines-per-function */
 module.exports = {
   /**
    *
@@ -35,7 +35,7 @@ module.exports = {
       },
     });
   },
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface, _Sequelize) {
     await queryInterface.dropTable('People');
   },
 };
