@@ -8,7 +8,15 @@ module.exports = (sequelize, DataTypes) => {
   const Person = sequelize.define(
     'Person',
     {
-      name: DataTypes.STRING,
+      name: {
+        type: DataTypes.STRING,
+        validate: {
+          len: {
+            args: [3, 20],
+            msg: 'Please enter a name with a min of 3 charecters and max of 20 characters',
+          },
+        },
+      },
       active: DataTypes.BOOLEAN,
       email: {
         type: DataTypes.STRING,
