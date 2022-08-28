@@ -13,7 +13,16 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       role: DataTypes.STRING,
     },
-    { tableName: 'People', paranoid: true },
+    {
+      tableName: 'People',
+      paranoid: true,
+      defaultScope: {
+        where: { active: true },
+      },
+      scopes: {
+        all: { where: {} },
+      },
+    },
   );
 
   Person.associate = (models) => {

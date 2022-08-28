@@ -5,9 +5,18 @@ class PersonController {
    * @param {import('express').Request} req
    * @param {import('express').Response} res
    */
-  static async getPeople(_req, res) {
+  static async getAllActive(_req, res) {
     try {
       const people = await Person.findAll();
+      return res.status(200).json(people);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
+  static async getAll(_req, res) {
+    try {
+      const people = await Person.scope('all').findAll();
       return res.status(200).json(people);
     } catch (error) {
       return res.status(500).json(error.message);
@@ -18,7 +27,7 @@ class PersonController {
    * @param {import('express').Request} req
    * @param {import('express').Response} res
    */
-  static async getPerson(req, res) {
+  static async getOne(req, res) {
     const { id } = req.params;
     try {
       const person = await Person.findByPk(id);
@@ -32,7 +41,7 @@ class PersonController {
    * @param {import('express').Request} req
    * @param {import('express').Response} res
    */
-  static async createPerson(req, res) {
+  static async create(req, res) {
     try {
       const { name, active, email, role } = req.body;
       const person = await Person.create({ name, active, email, role });
@@ -42,7 +51,7 @@ class PersonController {
     }
   }
 
-  static async updatePerson(req, res) {
+  static async update(req, res) {
     try {
       const { id } = req.params;
       const { name, active, email, role } = req.body;
@@ -58,11 +67,21 @@ class PersonController {
     }
   }
 
-  static async deletePerson(req, res) {
+  static async delete(req, res) {
     try {
       const { id } = req.params;
       await Person.destroy({ where: { id } });
-      res.send(200).json({ message: 'Deleted' });
+      res.status(200).json({ message: 'Deleted' });
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
+  static async restore(req, res) {
+    const { id } = req.params;
+    try {
+      await Person.restore({ where: { id } });
+      return res.status(200).json({ message: `${id} restored` });
     } catch (error) {
       return res.status(500).json(error.message);
     }

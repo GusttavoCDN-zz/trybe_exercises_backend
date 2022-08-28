@@ -4,11 +4,13 @@ const EnrollmentController = require('../controllers/EnrollmentController');
 
 const router = Router();
 
-router.get('/:id', PersonController.getPerson);
-router.put('/:id', PersonController.updatePerson);
-router.delete('/:id', PersonController.deletePerson);
-router.get('/', PersonController.getPeople);
-router.post('/', PersonController.createPerson);
+router.get('/all', PersonController.getAll);
+router.post('/:id/restore', PersonController.restore);
+router.get('/:id', PersonController.getOne);
+router.put('/:id', PersonController.update);
+router.delete('/:id', PersonController.delete);
+router.get('/', PersonController.getAllActive);
+router.post('/', PersonController.create);
 
 // eslint-disable-next-line sonarjs/no-duplicate-string
 router.get('/:studentId/enrollments/:enrollmentId', EnrollmentController.getOne);
