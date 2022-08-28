@@ -5,9 +5,13 @@
  * @param {import('sequelize').DataTypes } DataTypes
  */
 module.exports = (sequelize, DataTypes) => {
-  const Class = sequelize.define('Class', {
-    start_date: DataTypes.DATEONLY,
-  });
+  const Class = sequelize.define(
+    'Class',
+    {
+      start_date: DataTypes.DATEONLY,
+    },
+    { paranoid: true },
+  );
 
   Class.associate = (models) => {
     Class.hasMany(models.Enrollment, {

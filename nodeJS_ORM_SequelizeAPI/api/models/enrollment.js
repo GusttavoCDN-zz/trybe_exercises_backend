@@ -4,9 +4,13 @@
  * @param {import('sequelize').DataTypes } DataTypes
  */
 module.exports = (sequelize, DataTypes) => {
-  const Enrollment = sequelize.define('Enrollment', {
-    status: DataTypes.STRING,
-  });
+  const Enrollment = sequelize.define(
+    'Enrollment',
+    {
+      status: DataTypes.STRING,
+    },
+    { paranoid: true },
+  );
 
   Enrollment.associate = (models) => {
     Enrollment.belongsTo(models.Person, { foreignKey: 'student_id' });

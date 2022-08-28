@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       role: DataTypes.STRING,
     },
-    { tableName: 'People' },
+    { tableName: 'People', paranoid: true },
   );
 
   Person.associate = (models) => {
