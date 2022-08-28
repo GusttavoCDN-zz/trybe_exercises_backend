@@ -15,11 +15,6 @@ class BooksServices {
     return Book.findByPk(id);
   }
 
-  static orderBooks(books) {
-    const orderedBooks = books.sort((a, b) => a.title.localeCompare(b.title));
-    return orderedBooks;
-  }
-
   static validateParamsId(unknown) {
     const schema = Joi.number().positive().integer();
 
@@ -41,8 +36,9 @@ class BooksServices {
   static async getAll() {
     const books = await Book.findAll({
       attributes: { exclude: ['createdAt', 'updatedAt', 'id'] },
+      order: [['title', 'ASC']],
     });
-    return this.orderBooks(books);
+    return books;
   }
 
   static async getById(id) {
@@ -66,6 +62,7 @@ class BooksServices {
         },
       },
       attributes: { exclude: ['createdAt', 'updatedAt', 'id'] },
+      order: [['title', 'ASC']],
     });
     return this.orderBooks(books);
   }
