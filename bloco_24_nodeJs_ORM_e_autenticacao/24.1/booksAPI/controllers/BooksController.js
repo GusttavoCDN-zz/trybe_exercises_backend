@@ -1,8 +1,12 @@
 const BooksServices = require('../services/BooksServices');
 
 class BooksController {
-  static async getAll(_req, res) {
-    const books = await BooksServices.getAll();
+  static async getAll(req, res) {
+    const { author } = req.query;
+    const books = !author
+      ? await BooksServices.getAll(author)
+      : await BooksServices.getByAuthor(author);
+
     return res.status(200).json(books);
   }
 

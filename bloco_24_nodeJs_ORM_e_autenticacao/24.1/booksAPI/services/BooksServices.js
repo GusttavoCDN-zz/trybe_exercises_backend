@@ -1,4 +1,6 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 const Joi = require('joi');
+const { Op } = require('sequelize');
 const { Book } = require('../models');
 
 class BooksServices {
@@ -11,6 +13,11 @@ class BooksServices {
 
   static async exists(id) {
     return Book.findByPk(id);
+  }
+
+  static orderBooks(books) {
+    const orderedBooks = books.sort((a, b) => a.title.localeCompare(b.title));
+    return orderedBooks;
   }
 
   static validateParamsId(unknown) {
@@ -33,9 +40,9 @@ class BooksServices {
 
   static async getAll() {
     const books = await Book.findAll({
-      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      attributes: { exclude: ['createdAt', 'updatedAt', 'id'] },
     });
-    return books;
+    return this.orderBooks(books);
   }
 
   static async getById(id) {
@@ -48,6 +55,19 @@ class BooksServices {
 
     if (!book) return this.sendError('404', 'Book not found');
     return book;
+  }
+
+  // ? O objeto Op pode ser usado para fazer comparaçoes mais precisas de SQL usando like, and, or, etc.
+  static async getByAuthor(author) {
+    const books = await Book.findAll({
+      where: {
+        author: {
+          [Op.like]: `${author}%`,
+        },
+      },
+      attributes: { exclude: ['createdAt', 'updatedAt', 'id'] },
+    });
+    return this.orderBooks(books);
   }
 
   static async create(book) {
