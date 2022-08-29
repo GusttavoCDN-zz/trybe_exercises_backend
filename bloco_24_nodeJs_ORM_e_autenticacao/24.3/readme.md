@@ -13,3 +13,8 @@
 É um padrão de mercado que define um token em formato JSON para fazer autenticações.
 
 ## Material de Referencia
+
+- [HMAC](https://tools.ietf.org/html/rfc2104)
+- [JWT](https://jwt.io/)
+- [Documentação do pacote jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+- [Entendendo JWT](https://medium.com/tableless/entendendo-tokens-jwt-json-web-token-413c6d1397f6)
