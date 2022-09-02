@@ -1,10 +1,17 @@
 /* eslint-disable camelcase */
-const { Class } = require('../models');
+const { Class, Enrollment } = require('../models');
+const { Op } = require('sequelize');
 
 class ClassController {
   static async getAll(req, res) {
+    const { start_date, final_date } = req.query;
+    const where = {};
+    if (start_date || final_date) where['start_date'] = {};
+    if (start_date) where['start_date'][Op.gte] = start_date;
+    if (final_date) where['start_date'][Op.lte] = final_date;
+
     try {
-      const classes = await Class.findAll();
+      const classes = await Class.findAll({ where });
       return res.status(200).json(classes);
     } catch (error) {
       return res.status(500).json(error);
