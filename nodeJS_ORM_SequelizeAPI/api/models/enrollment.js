@@ -9,7 +9,12 @@ module.exports = (sequelize, DataTypes) => {
     {
       status: DataTypes.STRING,
     },
-    { paranoid: true },
+    {
+      paranoid: true,
+      defaultScope: {
+        where: { status: 'confirmado' },
+      },
+    }
   );
 
   Enrollment.associate = (models) => {

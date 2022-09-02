@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
       scopes: {
         all: { where: {} },
       },
-    },
+    }
   );
 
   Person.associate = (models) => {
@@ -48,6 +48,8 @@ module.exports = (sequelize, DataTypes) => {
 
     Person.hasMany(models.Enrollment, {
       foreignKey: 'student_id',
+      scope: { status: 'confirmado' },
+      as: 'enrollments',
     });
   };
 

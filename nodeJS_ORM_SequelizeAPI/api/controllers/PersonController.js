@@ -41,6 +41,23 @@ class PersonController {
    * @param {import('express').Request} req
    * @param {import('express').Response} res
    */
+  static async getEnrollments(req, res) {
+    const { studentId } = req.params;
+    try {
+      const person = await Person.findByPk(studentId);
+      // * Mixin que é criado quando se cria um model associado a outro. Permite a utilização de funções pré criadas.
+      const enrollments = await person.getEnrollments();
+      console.log(enrollments);
+      return res.status(200).json(enrollments);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
+  /**
+   * @param {import('express').Request} req
+   * @param {import('express').Response} res
+   */
   static async create(req, res) {
     try {
       const { name, active, email, role } = req.body;
@@ -59,7 +76,7 @@ class PersonController {
         { name, active, email, role },
         {
           where: { id },
-        },
+        }
       );
       return res.status(200).json(updatedPerson);
     } catch (error) {

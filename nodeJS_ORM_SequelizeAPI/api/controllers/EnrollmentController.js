@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-const { Enrollment } = require('../models');
+const { Enrollment, Sequelize } = require('../models');
 
 class EnrollmentController {
   static async getOne(req, res) {
@@ -14,6 +14,32 @@ class EnrollmentController {
       return res.status(200).json(enrollment);
     } catch (error) {
       return res.status(500).json(error.message);
+    }
+  }
+
+  static async getAllByClass(req, res) {
+    const { classId } = req.params;
+    try {
+      const enrollments = await Enrollment.findAndCountAll({
+        where: { class_id: classId },
+      });
+      return res.status(200).json(enrollments);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
+  static async getFull(req, res) {
+    const full = 2;
+    try {
+      const fullClasses = await Enrollment.findAndCountAll({
+        attributes: ['class_id'],
+        group: ['class_id'],
+        having: Sequelize.literal(`count(class_id) >= ${full}`),
+      });
+      return res.status(200).json(fullClasses.count);
+    } catch (error) {
+      return res.status(500).json(error);
     }
   }
 
