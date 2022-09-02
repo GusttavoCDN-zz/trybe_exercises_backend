@@ -13,6 +13,7 @@ router.get('/enrollments/full', EnrollmentController.getFull);
 router.get('/enrollments/:classId', EnrollmentController.getAllByClass);
 
 router.post('/:studentId/enrollments/', EnrollmentController.create);
+router.post('/:studentId/cancel', PersonController.cancelStudent);
 router.post('/:id/restore', PersonController.restore);
 router.post('/', PersonController.create);
 
