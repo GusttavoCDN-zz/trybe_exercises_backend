@@ -7,3 +7,5 @@
 
 
 ### Material de Referencia
+
+-[Node.js and TypeScript Tutorial: Build a CRUD API | auth0](https://auth0.com/blog/node-js-and-typescript-tutorial-build-a-crud-api/)
