@@ -1,4 +1,4 @@
-import { Pool, ResultSetHeader } from 'mysql2/promise';
+import { Pool, ResultSetHeader, RowDataPacket } from 'mysql2/promise';
 
 export interface Book {
   id?: number;
@@ -15,8 +15,8 @@ export default class BookModel {
     this.connection = connection;
   }
 
-  public async getAll() {
-    const result = await this.connection.execute('SELECT * FROM books');
+  public async getAll(): Promise<Book[]> {
+    const result = await this.connection.execute<RowDataPacket[]>('SELECT * FROM books');
     const [rows] = result;
     return rows as Book[];
   }
@@ -30,5 +30,25 @@ export default class BookModel {
       book.isbn,
     ]);
     return { id, ...book };
+  }
+
+  public async update(book: Book): Promise<Book> {
+    const query =
+      'UPDATE books SET title = ?, price = ?, author = ?, isbn = ? WHERE id = ?';
+
+    await this.connection.execute<ResultSetHeader>(query, [
+      book.title,
+      book.price,
+      book.author,
+      book.isbn,
+      book.id,
+    ]);
+
+    return book;
+  }
+
+  public async delete(id: Book['id']): Promise<void> {
+    const query = 'DELETE FROM books WHERE id = ?';
+    await this.connection.execute<ResultSetHeader>(query, [id]);
   }
 }
