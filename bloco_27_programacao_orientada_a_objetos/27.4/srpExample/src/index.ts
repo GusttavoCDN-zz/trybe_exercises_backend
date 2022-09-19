@@ -1,22 +1,31 @@
 // ./src/index.ts
 
+/* Apoio para a função `getGradeLetter` */
+const GRADE_DICT = {
+  numbers: [0.9, 0.8, 0.7, 0.6, 0.1],
+  letters: ['A', 'B', 'C', 'D', 'E'],
+};
+
 type Discipline = {
   name: string;
   grade: number;
   letterGrade?: string;
 };
 
+type School = {
+  name: string;
+  approvalGrade: number;
+};
+
 type Student = {
   name: string;
   disciplines: Discipline[];
-  school?: string;
+  school: School; // Agora não é mais uma string
 };
 
-/* Apoio para a função `getGradeLetter` */
-const GRADE_DICT = {
-  numbers: [0.9, 0.8, 0.7, 0.6, 0.1],
-  letters: ['A', 'B', 'C', 'D', 'E'],
-};
+/* "Determinar" */
+const approvedStudents = ({ disciplines, school }: Student): boolean =>
+  disciplines.every(({ grade }) => grade >= school.approvalGrade);
 
 /* Função menor para remover o uso excessivo de `if{}else`s */
 const getGradeLetter = (gradeNumber: number): string => {
@@ -40,16 +49,13 @@ const percentageGradesIntoLetters = (student: Student): Student => ({
   disciplines: student.disciplines.map(getLetterGrades),
 });
 
-/* "Determinar" */
-const approvedStudents = ({ disciplines }: Student): boolean =>
-  disciplines.every(({ grade }) => grade > 0.7);
-
 /* "Atualizar" */
 const updateApprovalData = (student: Student): void => {
   console.log(`A pessoa com nome ${student.name} foi aprovada!`);
 
   student.disciplines.forEach(({ name, letterGrade }) =>
-    console.log(`${name}: ${letterGrade}`));
+    console.log(`${name}: ${letterGrade}`)
+  );
 };
 
 function setApproved(students: Student[]): void {
