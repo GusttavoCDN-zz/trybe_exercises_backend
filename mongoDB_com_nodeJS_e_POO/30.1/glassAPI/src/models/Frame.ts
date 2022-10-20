@@ -1,7 +1,7 @@
 // ./src/models/Frame.ts
 
 import { model as mongooseCreateModel, Schema } from 'mongoose';
-import IFrame from '../interfaces/Frame';
+import IFrame from '../interfaces/IFrame';
 import MongoModel from './MongoModel';
 
 const frameMongooseSchema = new Schema<IFrame>({
