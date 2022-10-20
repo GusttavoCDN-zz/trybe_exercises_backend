@@ -1,5 +1,11 @@
 // ./src/interfaces/Frame.ts
 
+// All the code is this file is some way to declare interfaces with valition rules for the mongoose models
+// interface IFrame {
+//   material: string;
+//   color: string;
+// }
+
 import { z } from 'zod';
 
 const FrameZodSchema = z.object({

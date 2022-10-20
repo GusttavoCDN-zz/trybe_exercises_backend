@@ -1,7 +1,7 @@
 // ./src/models/Lens.ts
 
 import { model as mongooseModel, Schema } from 'mongoose';
-import ILens from '../interfaces/Lens';
+import ILens from '../interfaces/ILens';
 import MongoModel from './MongoModel';
 
 const lensMongooseSchema = new Schema<ILens>({

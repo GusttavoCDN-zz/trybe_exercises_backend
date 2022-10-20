@@ -1,6 +1,6 @@
 // ./src/models/MongoModel.ts
 
-import { isValidObjectId, Model } from 'mongoose';
+import { isValidObjectId, Model, UpdateQuery } from 'mongoose';
 import IModel from '../interfaces/IModel';
 
 abstract class MongoModel<T> implements IModel<T> {
@@ -17,6 +17,19 @@ abstract class MongoModel<T> implements IModel<T> {
   public async readOne(id: string): Promise<T | null> {
     if (!isValidObjectId(id)) throw Error('InvalidMongoId');
     return this._model.findOne({ id });
+  }
+
+  public async read(): Promise<T[]> {
+    return this._model.find();
+  }
+
+  public async update(_id: string, obj: Partial<T>): Promise<T | null> {
+    if (!isValidObjectId(_id)) throw Error('InvalidMongoId');
+    return this._model.findByIdAndUpdate(
+      { _id },
+      { ...obj } as UpdateQuery<T>,
+      { new: true },
+    );
   }
 }
 
