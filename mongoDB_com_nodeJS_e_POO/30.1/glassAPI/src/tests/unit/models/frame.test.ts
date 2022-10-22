@@ -18,8 +18,8 @@ describe('Frame Model', () => {
     sinon.stub(Model, 'create').resolves(frameMockWithId);
     sinon.stub(Model, 'findOne').resolves(frameMockWithId);
     sinon.stub(Model, 'find').resolves(frameArrayMock);
-    sinon.stub(Model, 'findOneAndUpdate').resolves(frameUpdatedMock);
-    sinon.stub(Model, 'findOneAndDelete').resolves(frameMockWithId);
+    sinon.stub(Model, 'findByIdAndUpdate').resolves(frameUpdatedMock);
+    sinon.stub(Model, 'findByIdAndDelete').resolves(frameMockWithId);
 
   });
 
