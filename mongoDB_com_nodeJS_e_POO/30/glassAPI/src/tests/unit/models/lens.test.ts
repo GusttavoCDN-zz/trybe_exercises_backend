@@ -75,20 +75,20 @@ describe('Lens Model', () => {
   //    });
   // });
 
-    describe('Deleting a Lens', () => {
-      it('successful deletion', async () => {
-        const lensDeleted = await lensModel.destroy('5f9f1b9b9b9b9b9b9b9b9b9b');
-        expect(lensDeleted).to.be.deep.equal(lensMockWithId);
-      });
+    // describe('Deleting a Lens', () => {
+    //   it('successful deletion', async () => {
+    //     const lensDeleted = await lensModel.destroy('5f9f1b9b9b9b9b9b9b9b9b9b');
+    //     expect(lensDeleted).to.be.deep.equal(lensMockWithId);
+    //   });
 
-      it('_id invalid', async () => {
-        try {
-          await lensModel.destroy('idinvalid');
-        } catch (error: any) {
-          expect(error.message).to.be.eq('InvalidMongoId');
-        }
-      });
-    });
+    //   it('_id invalid', async () => {
+    //     try {
+    //       await lensModel.destroy('idinvalid');
+    //     } catch (error: any) {
+    //       expect(error.message).to.be.eq('InvalidMongoId');
+    //     }
+    //   });
+    // });
 
 
 });
